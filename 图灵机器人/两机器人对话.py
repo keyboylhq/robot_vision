@@ -1,5 +1,9 @@
 import requests
 import json
+import win32com.client
+import speech
+import time
+
 imageUrl = ''
 city = '广东'
 province = '湛江'
@@ -52,7 +56,13 @@ def robot_read(text_input,apiKey,robot_name):
     # print(r.text)
     # print(response_dic)
     results_text = response_dic['results'][0]['values']['text']
-    print('robot%s：'%robot_name + results_text)
+    print('robot%s：' % robot_name + results_text)
+
+    speech.say(results_text)
+
+    # speaker = win32com.client.Dispatch("SAPI.SpVoice")
+    # speaker.Speak(results_text)
+
     return results_text
     # print('code：' + str(intent_code))
     # print('robot_text：' + results_text)
@@ -63,7 +73,6 @@ def robot_read(text_input,apiKey,robot_name):
     # print('robot_text：' + results_text)
 
 while True:
-    robot1=robot_read(robot2,'e4ef3f4f0a114951af947e1783f46cc1','白猫')
-    robot2=robot_read(robot1,'ad808275903a4733864a9f0ac4554181','小悦')
-
-
+    robot1=robot_read(robot2,'ad808275903a4733864a9f0ac4554181','keyboy')
+    time.sleep(1.5)
+    robot2=robot_read(robot1,'e4ef3f4f0a114951af947e1783f46cc1','lisa')
